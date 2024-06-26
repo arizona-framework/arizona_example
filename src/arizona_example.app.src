@@ -1,0 +1,14 @@
+{application, arizona_example, [
+    {description, "This is a showcase of Arizona (Web Framework for Erlang)'s capabilities"},
+    {vsn, semver},
+    {mod, {arizona_example_app, []}},
+    {applications, [
+        % OTP dependencies
+        kernel,
+        stdlib,
+        % External dependencies
+        arizona
+    ]},
+    {licenses, ["Apache-2.0"]},
+    {links, [{"GitHub", "https://github.com/arizona-framework/arizona_example"}]}
+ ]}.

@@ -20,8 +20,9 @@
 Bugs can be reported via
 [GitHub issues: bug report](https://github.com/arizona-framework/arizona_example/issues/new?template=bug_report.md).
 
-Some contributors and maintainers may be unpaid developers working on `arizona_example`, in their own time,
-with limited resources. We ask for respect and understanding, and will provide the same back.
+Some contributors and maintainers may be unpaid developers working on `arizona_example`, in their
+own time, with limited resources. We ask for respect and understanding, and will provide the same
+back.
 
 If your contribution is an actual bug fix, we ask you to include tests that, not only show the issue
 is solved, but help prevent future regressions related to it.
@@ -30,8 +31,8 @@ is solved, but help prevent future regressions related to it.
 
 Before requesting or implementing a new feature, do the following:
 
-- search, in existing [issues](https://github.com/arizona-framework/arizona_example/issues) (open or closed),
-whether the feature might already be in the works, or has already been rejected,
+- search, in existing [issues](https://github.com/arizona-framework/arizona_example/issues) (open or
+closed), whether the feature might already be in the works, or has already been rejected,
 - make sure you're using the latest software release (or even the latest code, if you're going for
 _bleeding edge_).
 
@@ -40,8 +41,8 @@ If this is done, open up a
 
 We may discuss details with you regarding the implementation, and its inclusion within the project.
 
-We try to have as many of `arizona_example`'s features tested as possible. Everything that a user can do,
-and is repeatable in any way, should be tested, to guarantee backwards compatible.
+We try to have as many of `arizona_example`'s features tested as possible. Everything that a user
+can do, and is repeatable in any way, should be tested, to guarantee backwards compatible.
 
 ## Submitting your changes
 

@@ -7,8 +7,8 @@
 -export([handle_event/3]).
 
 %% Component functions.
--export([counter/1]).
--export([button/1]).
+-export([counter/1]). -ignore_xref([counter/1]).
+-export([button/1]). -ignore_xref([button/1]).
 
 %% Libs
 -include_lib("arizona/include/arizona.hrl").

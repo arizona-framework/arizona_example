@@ -17,10 +17,16 @@
 %% arizona_live_view callbacks.
 %% --------------------------------------------------------------------
 
+-spec mount(Socket) -> Mounted
+    when Socket :: arizona_socket:t(),
+         Mounted :: {ok, arizona_socket:t()}.
 mount(#{assigns := Assigns} = Socket) ->
     Count = maps:get(count, Assigns, 0),
     {ok, arizona_socket:assign(count, Count, Socket)}.
 
+-spec render(Macros) -> Tree
+    when Macros :: arizona_live_view:macros(),
+         Tree :: arizona_live_view:tree().
 render(Macros0) ->
     Macros = Macros0#{
         title => maps:get(title, Macros0, ~"Arizona")
@@ -50,6 +56,11 @@ render(Macros0) ->
     </html>
     """).
 
+-spec handle_event(EventName, Payload, Socket) -> Handled
+    when EventName :: binary(),
+         Payload :: arizona:payload(),
+         Socket :: arizona_socket:t(),
+         Handled :: {noreply, arizona_socket:t()}.
 handle_event(<<"incr">>, #{}, #{assigns := Assigns} = Socket) ->
     Count = maps:get(count, Assigns) + 1,
     {noreply, arizona_socket:assign(count, Count, Socket)};
@@ -61,6 +72,9 @@ handle_event(<<"decr">>, #{}, #{assigns := Assigns} = Socket) ->
 %% Component functions.
 %% --------------------------------------------------------------------
 
+-spec counter(Macros) -> Tree
+    when Macros :: arizona_live_view:macros(),
+         Tree :: arizona_live_view:tree().
 counter(Macros) ->
     ?ARIZONA_LIVEVIEW(~s"""
     <div :stateful>
@@ -69,6 +83,9 @@ counter(Macros) ->
     </div>
     """).
 
+-spec button(Macros) -> Tree
+    when Macros :: arizona_live_view:macros(),
+         Tree :: arizona_live_view:tree().
 button(Macros) ->
     ?ARIZONA_LIVEVIEW(~s"""
     {% NOTE: On this example, :onclick is and expression to be }

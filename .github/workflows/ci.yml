@@ -55,6 +55,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Maybe close failure notification
+        if: github.event.pull_request == null
         run: |
           if [[ -z "${{steps.failed-build.outputs.issue-number}}" ]];then
             build_failed=$(\

@@ -9,6 +9,8 @@ name: CI
     branches:
       - "*"
   workflow_dispatch: {}
+  schedule:
+    - cron: 0 18 * * *
 
 concurrency:
   group: ${{github.workflow}}-${{github.ref}}
@@ -44,3 +46,9 @@ jobs:
 
       - name: Check if build left artifacts
         run: git diff --exit-code
+
+      - name: Notify on failed build
+        uses: jayqi/failed-build-issue-action@v1.2.0
+        if: failure() && github.event.pull_request == null
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}

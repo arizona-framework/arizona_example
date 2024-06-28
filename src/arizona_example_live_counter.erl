@@ -82,7 +82,7 @@ counter(Macros) ->
          Tree :: arizona_live_view:tree().
 button(Macros) ->
     ?ARIZONA_LIVEVIEW(Macros, ~s"""
-    {% NOTE: On this example, :onclick is and expression to be }
+    {% Note: in this example, :onclick is an expression, in order to be }
     {%       dynamic. It could be just, e.g., :onclick="incr". }
     <button type="button" :onclick={arizona_js:send(_@event)}>
         {_@text}

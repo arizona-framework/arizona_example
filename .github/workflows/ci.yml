@@ -29,16 +29,6 @@ jobs:
           version-type: strict
           version-file: .tool-versions
 
-      - name: Restore _build
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
-        with:
-          path: _build
-          key: "_build-cache-for\
-                -os-${{runner.os}}\
-                -otp-${{steps.setup-beam.outputs.otp-version}}\
-                -rebar3-${{steps.setup-beam.outputs.rebar3-version}}\
-                -hash-${{hashFiles('rebar.lock')}}"
-
       - name: Restore rebar3's cache
         uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
         with:
@@ -46,8 +36,7 @@ jobs:
           key: "rebar3-cache-for\
                 -os-${{runner.os}}\
                 -otp-${{steps.setup-beam.outputs.otp-version}}\
-                -rebar3-${{steps.setup-beam.outputs.rebar3-version}}\
-                -hash-${{hashFiles('rebar.lock')}}"
+                -rebar3-${{steps.setup-beam.outputs.rebar3-version}}"
 
       - name: Continuous Integration
         run: |

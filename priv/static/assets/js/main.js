@@ -1,7 +1,8 @@
-"use strict"
+/*global arizona, console*/
+"use strict";
 
-const connectParams = { }
+const connectParams = {};
 
 arizona.connect(connectParams, () => {
-    console.info("[Client] I'm connected!")
-})
+  console.info("[Client] I'm connected!");
+});

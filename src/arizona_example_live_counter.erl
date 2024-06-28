@@ -19,7 +19,7 @@
 
 -spec mount(Socket) -> Mounted
     when Socket :: arizona_socket:t(),
-         Mounted :: {ok, arizona_socket:t()}.
+         Mounted :: {error, arizona_socket:t()}.
 mount(Socket) ->
     Count = arizona_socket:get_assign(count, Socket, 0),
     {ok, arizona_socket:put_assign(count, Count, Socket)}.

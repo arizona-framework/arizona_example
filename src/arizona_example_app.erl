@@ -1,10 +1,4 @@
-%%%-------------------------------------------------------------------
-%% @doc arizona_example public API
-%% @end
-%%%-------------------------------------------------------------------
-
 -module(arizona_example_app).
-
 -behaviour(application).
 
 -export([start/2]).
@@ -22,5 +16,3 @@ start(_StartType, _StartArgs) ->
          Stopped :: ok.
 stop(_State) ->
     ok.
-
-%% internal functions

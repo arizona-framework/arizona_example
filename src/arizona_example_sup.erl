@@ -1,14 +1,7 @@
-%%%-------------------------------------------------------------------
-%% @doc arizona_example top level supervisor.
-%% @end
-%%%-------------------------------------------------------------------
-
 -module(arizona_example_sup).
-
 -behaviour(supervisor).
 
 -export([start_link/0]).
-
 -export([init/1]).
 
 -define(SERVER, ?MODULE).
@@ -31,5 +24,3 @@ init([]) ->
     },
     ChildSpecs = [],
     {ok, {SupFlags, ChildSpecs}}.
-
-%% internal functions

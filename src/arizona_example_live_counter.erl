@@ -6,16 +6,13 @@
 -export([render/1]).
 -export([handle_event/3]).
 
-%% Component functions.
+%% component functions.
 -export([counter/1]). -ignore_xref([counter/1]).
 -export([button/1]). -ignore_xref([button/1]).
 
-%% Libs
 -include_lib("arizona/include/arizona.hrl").
 
-%% --------------------------------------------------------------------
 %% arizona_live_view callbacks.
-%% --------------------------------------------------------------------
 
 -spec mount(Socket) -> Mounted
     when Socket :: arizona_socket:t(),
@@ -67,9 +64,7 @@ handle_event(<<"decr">>, _Payload, Socket) ->
     Count = arizona_socket:get_assign(count, Socket) - 1,
     {noreply, arizona_socket:put_assign(count, Count, Socket)}.
 
-%% --------------------------------------------------------------------
-%% Component functions.
-%% --------------------------------------------------------------------
+%% component functions.
 
 -spec counter(Macros) -> Tree
     when Macros :: arizona_live_view:macros(),

@@ -1,22 +1,13 @@
-%%%-------------------------------------------------------------------
-%% @doc arizona_example top level supervisor.
-%% @end
-%%%-------------------------------------------------------------------
-
 -module(arizona_example_sup).
-
 -behaviour(supervisor).
 
 -export([start_link/0]).
-
 -export([init/1]).
-
--define(SERVER, ?MODULE).
 
 -spec start_link() -> Ret
     when Ret :: supervisor:startlink_ret().
 start_link() ->
-    supervisor:start_link({local, ?SERVER}, ?MODULE, []).
+    supervisor:start_link({local, ?MODULE}, ?MODULE, []).
 
 -spec init(Args) -> Init
     when Args :: [],
@@ -31,5 +22,3 @@ init([]) ->
     },
     ChildSpecs = [],
     {ok, {SupFlags, ChildSpecs}}.
-
-%% internal functions

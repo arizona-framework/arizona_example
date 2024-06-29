@@ -6,16 +6,13 @@
 -export([render/1]).
 -export([handle_event/3]).
 
-%% Component functions.
+%% component functions.
 -export([counter/1]). -ignore_xref([counter/1]).
 -export([button/1]). -ignore_xref([button/1]).
 
-%% Libs
 -include_lib("arizona/include/arizona.hrl").
 
-%% --------------------------------------------------------------------
 %% arizona_live_view callbacks.
-%% --------------------------------------------------------------------
 
 -spec mount(Socket) -> Mounted
     when Socket :: arizona_socket:t(),
@@ -67,9 +64,7 @@ handle_event(<<"decr">>, _Payload, Socket) ->
     Count = arizona_socket:get_assign(count, Socket) - 1,
     {noreply, arizona_socket:put_assign(count, Count, Socket)}.
 
-%% --------------------------------------------------------------------
-%% Component functions.
-%% --------------------------------------------------------------------
+%% component functions.
 
 -spec counter(Macros) -> Tree
     when Macros :: arizona_live_view:macros(),
@@ -87,7 +82,7 @@ counter(Macros) ->
          Tree :: arizona_live_view:tree().
 button(Macros) ->
     ?ARIZONA_LIVEVIEW(Macros, ~s"""
-    {% NOTE: On this example, :onclick is and expression to be }
+    {% Note: in this example, :onclick is an expression, in order to be }
     {%       dynamic. It could be just, e.g., :onclick="incr". }
     <button type="button" :onclick={arizona_js:send(_@event)}>
         {_@text}

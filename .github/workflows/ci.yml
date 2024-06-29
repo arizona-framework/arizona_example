@@ -9,6 +9,7 @@ name: CI
     branches:
       - "*"
   workflow_dispatch: {}
+  merge_group:
   schedule:
     - cron: 0 18 * * *
 
@@ -50,5 +51,24 @@ jobs:
       - name: Notify on failed build
         uses: jayqi/failed-build-issue-action@v1.2.0
         if: failure() && github.event.pull_request == null
+        id: failed-build
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Maybe close failure notification
+        if: github.event.pull_request == null
+        run: |
+          if [[ -z "${{steps.failed-build.outputs.issue-number}}" ]];then
+            build_failed=$(\
+              gh search issues\
+                --label "build failed"\
+                --json "number"\
+                --jq ".[0].number"\
+                --repo "${{github.repository}}"\
+              )
+            if [[ "${build_failed}" != "null" ]]; then
+              gh issue close "${build_failed}"
+            fi
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}

@@ -10,11 +10,11 @@ start_link() ->
     supervisor:start_link({local, ?MODULE}, ?MODULE, []).
 
 -spec init(Args) -> Init
-    when Args :: [],
+    when Args :: term(),
          Init :: {ok, {SupFlags, [ChildSpec]}},
          SupFlags :: supervisor:sup_flags(),
          ChildSpec :: supervisor:child_spec().
-init([]) ->
+init(_Args) ->
     SupFlags = #{
         strategy => one_for_all,
         intensity => 0,

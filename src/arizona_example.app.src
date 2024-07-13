@@ -6,6 +6,7 @@
         % OTP dependencies
         kernel,
         stdlib,
+        sasl,
         % External dependencies
         arizona
     ]},

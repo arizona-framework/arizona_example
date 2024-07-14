@@ -20,7 +20,7 @@ mount(Socket) ->
     arizona_socket:put_assign(count, Count, Socket).
 
 -spec render(Macros) -> Tree
-    when Macros :: arizona_live_view:macros(),
+    when Macros :: arizona_template_compiler:macros(),
          Tree :: arizona_tpl_parse:tree().
 render(Macros0) ->
     Title = arizona_live_view:get_macro(title, Macros0, ~"Arizona"),
@@ -65,7 +65,7 @@ handle_event(<<"decr">>, _Payload, Socket) ->
 %% component functions.
 
 -spec counter(Macros) -> Tree
-    when Macros :: arizona_live_view:macros(),
+    when Macros :: arizona_template_compiler:macros(),
          Tree :: arizona_tpl_parse:tree().
 counter(Macros) ->
     arizona_live_view:parse_str(~s"""
@@ -76,7 +76,7 @@ counter(Macros) ->
     """, Macros).
 
 -spec button(Macros) -> Tree
-    when Macros :: arizona_live_view:macros(),
+    when Macros :: arizona_template_compiler:macros(),
          Tree :: arizona_tpl_parse:tree().
 button(Macros) ->
     arizona_live_view:parse_str(~s"""

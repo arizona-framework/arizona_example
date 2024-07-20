@@ -19,9 +19,9 @@ mount(Socket) ->
     Count = arizona_socket:get_assign(count, Socket, 0),
     arizona_socket:put_assign(count, Count, Socket).
 
--spec render(Macros) -> Tree
+-spec render(Macros) -> Result
     when Macros :: arizona_template_compiler:macros(),
-         Tree :: arizona_tpl_parse:tree().
+         Result :: arizona_live_view:render_res().
 render(Macros0) ->
     Title = arizona_live_view:get_macro(title, Macros0, ~"Arizona"),
     Macros = arizona_live_view:put_macro(title, Title, Macros0),
@@ -64,9 +64,9 @@ handle_event(<<"decr">>, _Payload, Socket) ->
 
 %% component functions.
 
--spec counter(Macros) -> Tree
+-spec counter(Macros) -> Result
     when Macros :: arizona_template_compiler:macros(),
-         Tree :: arizona_tpl_parse:tree().
+         Result :: arizona_live_view:render_res().
 counter(Macros) ->
     arizona_live_view:parse_str(~"""
     <div :stateful>
@@ -75,9 +75,9 @@ counter(Macros) ->
     </div>
     """, Macros).
 
--spec button(Macros) -> Tree
+-spec button(Macros) -> Result
     when Macros :: arizona_template_compiler:macros(),
-         Tree :: arizona_tpl_parse:tree().
+         Result :: arizona_live_view:render_res().
 button(Macros) ->
     arizona_live_view:parse_str(~"""
     {% Note: in this example, :onclick is an expression, in order to be }

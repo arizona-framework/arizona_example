@@ -11,7 +11,9 @@ async function btnClick(page, btnId) {
 }
 
 async function launchAt(location) {
-	const browser = await require('puppeteer').launch();
+	const browser = await require('puppeteer').launch({
+		args: ['--no-sandbox', '--disable-setuid-sandbox'],
+	});
 	const page = await browser.newPage();
 	await page.goto(location);
 	return [browser, page];

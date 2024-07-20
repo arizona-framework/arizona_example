@@ -4,7 +4,8 @@
 		"prettier": "prettier eslint.config.mjs --write && prettier package.json --write && prettier .prettierrc --write && prettier test/test.js --write",
 		"eslint": "eslint eslint.config.mjs && eslint test/test.js",
 		"format-lint": "npm install && npm run prettier && npm run eslint",
-		"test": "npm install && node test/test.js"
+		"test": "npm install && node test/test.js",
+		"ci": "npm run format-lint && npm run test"
 	},
 	"devDependencies": {
 		"@eslint/js": "9.7.0",

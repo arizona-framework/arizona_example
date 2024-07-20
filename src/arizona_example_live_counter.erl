@@ -37,17 +37,13 @@ render(Macros0) ->
     </head>
     <body>
         <.counter
-            count={_@count}
-            count_id="count_incr"
-            btn_text="Increment"
-            btn_id="btn_incr"
+            count={_@count} count_id="count_incr"
+            btn_text="Increment" btn_id="btn_incr"
             event="incr"
         />
         <.counter
-            count={99}
-            count_id="count_decr"
-            btn_text="Decrement"
-            btn_id="btn_decr"
+            count={99} count_id="count_decr"
+            btn_text="Decrement" btn_id="btn_decr"
             event="decr"
         />
     </body>

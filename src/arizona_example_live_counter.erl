@@ -37,13 +37,13 @@ render(Macros0) ->
     </head>
     <body>
         <.counter
-            count={_@count}
-            btn_text="Increment"
+            count={_@count} count_id="count_incr"
+            btn_text="Increment" btn_id="btn_incr"
             event="incr"
         />
         <.counter
-            count={99}
-            btn_text="Decrement"
+            count={99} count_id="count_decr"
+            btn_text="Decrement" btn_id="btn_decr"
             event="decr"
         />
     </body>
@@ -70,8 +70,8 @@ handle_event(<<"decr">>, _Payload, Socket) ->
 counter(Macros) ->
     arizona_live_view:parse_str(~"""
     <div :stateful>
-        <div>Count: {_@count}</div>
-        <.button event={_@event} text={_@btn_text} />
+        <div>Count: <span id={_@count_id}>{_@count}</span></div>
+        <.button id={_@btn_id} event={_@event} text={_@btn_text} />
     </div>
     """, Macros).
 
@@ -82,7 +82,7 @@ button(Macros) ->
     arizona_live_view:parse_str(~"""
     {% Note: in this example, :onclick is an expression, in order to be }
     {%       dynamic. It could be just, e.g., :onclick="incr". }
-    <button type="button" :onclick={arizona_js:send(_@event)}>
+    <button id={_@id} type="button" :onclick={arizona_js:send(_@event)}>
         {_@text}
     </button>
     """, Macros).

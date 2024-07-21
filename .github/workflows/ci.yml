@@ -46,12 +46,14 @@ jobs:
       - name: Continuous Integration
         run: |
           rebar3 as test ci
+          npm run format-lint
 
       - name: Test release
         run: |
           rebar3 release
           _build/default/rel/arizona_example/bin/arizona_example daemon
           curl -f -v http://127.0.0.1:8080
+          npm run test
           _build/default/rel/arizona_example/bin/arizona_example stop
 
       - name: Check if build left artifacts

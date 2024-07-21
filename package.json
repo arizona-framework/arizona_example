@@ -1,5 +1,4 @@
 {
-	"name": "Arizona Example JS",
 	"scripts": {
 		"prettier": "prettier eslint.config.mjs --write && prettier package.json --write && prettier .prettierrc --write && prettier test/test.js --write",
 		"eslint": "eslint eslint.config.mjs && eslint test/test.js",

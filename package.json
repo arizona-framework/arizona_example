@@ -11,6 +11,6 @@
     "eslint": "9.16.0",
     "globals": "15.13.0",
     "prettier": "3.4.2",
-    "puppeteer": "23.10.1"
+    "puppeteer": "23.10.2"
   }
 }

@@ -23,8 +23,8 @@ async function btnClick(page, btnId) {
 }
 
 async function launchAt(location) {
-  const browser = await require('puppeteer').launch({
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  const browser = await require("puppeteer").launch({
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
   const page = await browser.newPage();
   await page.goto(location);
@@ -36,9 +36,9 @@ async function teardown(browser) {
 }
 
 (async () => {
-  const location = 'http://localhost:8080';
-  const spanId = '#counter span';
-  const btnId = '#counter button';
+  const location = "http://localhost:8080";
+  const spanId = "#counter span";
+  const btnId = "#counter button";
   let count;
 
   const [browser, page] = await launchAt(location);

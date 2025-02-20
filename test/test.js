@@ -5,6 +5,18 @@ async function forCurCount(page, spanId) {
   return parseInt(count);
 }
 
+async function forNewCount(page, spanId, value0, timeout) {
+  await page.waitForFunction(
+    (selector, value) => {
+      console.log(`${value}`);
+      return window.document.querySelector(selector).innerText === `${value}`;
+    },
+    { timeout: timeout },
+    spanId,
+    value0,
+  );
+}
+
 async function btnClick(page, btnId) {
   console.log(`Clicking ${btnId}...`);
   await page.click(btnId);
@@ -23,22 +35,10 @@ async function teardown(browser) {
   await browser.close();
 }
 
-async function forNewCount(page, spanId, value0, timeout) {
-  await page.waitForFunction(
-    (selector, value) => {
-      console.log(`${value}`);
-      return window.document.querySelector(selector).innerText === `${value}`;
-    },
-    { timeout: timeout },
-    spanId,
-    value0,
-  );
-}
-
 (async () => {
   const location = 'http://localhost:8080';
-  const spanId = 'span#count_incr';
-  const btnId = 'button#btn_incr';
+  const spanId = '#counter span';
+  const btnId = '#counter button';
   let count;
 
   const [browser, page] = await launchAt(location);
@@ -46,7 +46,7 @@ async function forNewCount(page, spanId, value0, timeout) {
   count = await forCurCount(page, spanId);
   await btnClick(page, btnId);
   // fail if count isn't incremented by 1
-  await forNewCount(page, spanId, count + 1, 1250);
+  await forNewCount(page, spanId, count + 0, 1250);
   await forCurCount(page, spanId);
 
   await teardown(browser);

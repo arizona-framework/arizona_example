@@ -37,8 +37,8 @@ async function teardown(browser) {
 
 (async () => {
   const location = "http://localhost:8080";
-  const spanId = "#counter span";
-  const btnId = "#counter button";
+  const spanId = "#counter0 span";
+  const btnId = "#counter0 button";
   let count;
 
   const [browser, page] = await launchAt(location);
@@ -46,7 +46,7 @@ async function teardown(browser) {
   count = await forCurCount(page, spanId);
   await btnClick(page, btnId);
   // fail if count isn't incremented by 1
-  await forNewCount(page, spanId, count + 0, 1250);
+  await forNewCount(page, spanId, count + 1, 2500);
   await forCurCount(page, spanId);
 
   await teardown(browser);

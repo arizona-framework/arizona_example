@@ -4,6 +4,7 @@
 
 -export([mount/2]).
 -export([render/1]).
+-export([handle_event/3]).
 
 -spec mount(Assigns, Socket) -> {ok, View} | ignore when
     Assigns :: arizona_view:assigns(),
@@ -27,3 +28,12 @@ render(View) ->
         })}
     </div>
     """").
+
+-spec handle_event(Event, Payload, View0) -> View1 when
+    Event :: arizona_view:event(),
+    Payload :: arizona_view:payload(),
+    View0 :: arizona_view:view(),
+    View1 :: arizona_view:view().
+handle_event(~"incr", Incr, View) ->
+    Count = arizona_view:get_assign(count, View),
+    arizona_view:put_assign(count, Count + Incr, View).

@@ -1,6 +1,7 @@
 -module(arizona_example_components).
 
 -export([counter/1]).
+-ignore_xref([counter/1]).
 
 -spec counter(View) -> Token when
     View :: arizona_view:view(),

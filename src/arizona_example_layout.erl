@@ -2,6 +2,7 @@
 -compile({parse_transform, arizona_transform}).
 
 -export([render/1]).
+-ignore_xref([render/1]).
 
 -spec render(View) -> Token when
     View :: arizona_view:view(),

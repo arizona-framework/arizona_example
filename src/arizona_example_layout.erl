@@ -16,8 +16,7 @@ render(View) ->
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{arizona_view:get_assign(title, View)}</title>
-        <script src="assets/js/arizona/worker.js"></script>
-        <script src="assets/js/arizona/main.js"></script>
+        {arizona_html:scripts()}
         <script src="assets/js/main.js"></script>
     </head>
     <body>

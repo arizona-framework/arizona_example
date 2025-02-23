@@ -1,9 +1,9 @@
 /*global arizona*/
-"use strict";
+'use strict';
 
 const connectParams = {};
 arizona.connect(connectParams);
 
-arizona.subscribe("connect", () => {
+arizona.subscribe('connect', () => {
   console.info("[Client] I'm connected!");
 });

@@ -1,18 +1,18 @@
 /* global require, jest, beforeAll, afterAll, beforeEach, afterEach, describe, test, expect */
-const { setTimeout: forTimeout } = require("node:timers/promises");
-const puppeteer = require("puppeteer");
+const { setTimeout: forTimeout } = require('node:timers/promises');
+const puppeteer = require('puppeteer');
 
 // Increase Jest timeout for Puppeteer tests
 jest.setTimeout(30000); // 30 seconds
 
-describe("Counter Test", () => {
+describe('Counter Test', () => {
   let browser;
   let page;
 
   beforeAll(async () => {
     // Launch the browser before all tests
     browser = await puppeteer.launch({
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
   });
 
@@ -31,18 +31,18 @@ describe("Counter Test", () => {
     await page.close();
   });
 
-  test("should increment 1", async () => {
-    await page.goto("http://localhost:8080");
+  test('should increment 1', async () => {
+    await page.goto('http://localhost:8080');
 
     // Test the first counter
-    let spanSelector = "#counter0 span";
-    let btnSelector = "#counter0 button";
+    let spanSelector = '#counter0 span';
+    let btnSelector = '#counter0 button';
     let initialValue = 0;
     await expectCount(page, spanSelector, btnSelector, initialValue);
 
     // Test the second counter
-    spanSelector = "#counter10 span";
-    btnSelector = "#counter10 button";
+    spanSelector = '#counter10 span';
+    btnSelector = '#counter10 button';
     initialValue = 10;
     await expectCount(page, spanSelector, btnSelector, initialValue);
   });

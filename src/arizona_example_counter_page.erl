@@ -1,4 +1,4 @@
--module(arizona_example_page_view).
+-module(arizona_example_counter_page).
 -compile({parse_transform, arizona_transform}).
 -behaviour(arizona_view).
 

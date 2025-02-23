@@ -3,19 +3,19 @@
 -export([button/1]).
 -ignore_xref([button/1]).
 
--spec button(View) -> Token when
-    View :: arizona_view:view(),
-    Token :: arizona_render:token().
+-spec button(View) -> Rendered when
+    View :: arizona:view(),
+    Rendered :: arizona:rendered_component_template().
 button(View) ->
-    arizona_render:component_template(View, ~"""
+    arizona:render_component_template(View, ~"""
     <button
-        type="{arizona_view:get_assign(type, View, ~"button")}"
-        onclick={arizona_js:send(
-            arizona_view:get_assign(handler, View),
-            arizona_view:get_assign(event, View), 
-            arizona_view:get_assign(payload, View)
-        )}
+        type="{arizona:get_assign(type, View, ~"button")}"
+        onclick="{arizona:render_js_event(
+            arizona:get_assign(handler, View),
+            arizona:get_assign(event, View),
+            arizona:get_assign(payload, View)
+        )}"
     >
-        {arizona_view:get_assign(text, View)}
+        {arizona:get_assign(text, View)}
     </button>
     """).

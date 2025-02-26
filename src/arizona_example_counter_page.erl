@@ -2,9 +2,23 @@
 -compile({parse_transform, arizona_transform}).
 -behaviour(arizona_view).
 
+-export([handle_params/2]).
 -export([mount/2]).
 -export([render/1]).
 -export([handle_event/3]).
+
+-spec handle_params(PathParams, QueryString) -> {true, Bindings} when
+    PathParams :: arizona:path_params(),
+    QueryString :: arizona:query_string(),
+    Bindings :: arizona:bindings().
+handle_params(_PathParams, QueryString) ->
+    QueryParams = arizona:parse_query_string(QueryString),
+    case arizona:get_query_param(count, QueryParams, 0) of
+        Count when is_binary(Count) ->
+            {true, #{count => binary_to_integer(Count)}};
+        Count when is_integer(Count) ->
+            {true, #{count => Count}}
+    end.
 
 -spec mount(Bindings, Socket) -> Return when
     Bindings :: arizona:bindings(),
@@ -21,7 +35,8 @@ render(View) ->
     arizona:render_view_template(View, ~"""
     <div id="{arizona:get_binding(id, View)}">
         {arizona:render_view(arizona_example_counter_view, #{
-            id => ~"counter0"
+            id => ~"counter0",
+            count => arizona:get_binding(count, View)
         })}
 
         {arizona:render_view(arizona_example_counter_view, #{

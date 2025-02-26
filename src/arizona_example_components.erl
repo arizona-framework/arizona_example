@@ -9,13 +9,13 @@
 button(View) ->
     arizona:render_component_template(View, ~"""
     <button
-        type="{arizona:get_assign(type, View, ~"button")}"
+        type="{arizona:get_binding(type, View, ~"button")}"
         onclick="{arizona:render_js_event(
-            arizona:get_assign(handler, View),
-            arizona:get_assign(event, View),
-            arizona:get_assign(payload, View)
+            arizona:get_binding(handler, View),
+            arizona:get_binding(event, View),
+            arizona:get_binding(payload, View)
         )}"
     >
-        {arizona:get_assign(text, View)}
+        {arizona:get_binding(text, View)}
     </button>
     """).

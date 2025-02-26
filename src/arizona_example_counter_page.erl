@@ -6,12 +6,12 @@
 -export([render/1]).
 -export([handle_event/3]).
 
--spec mount(Assigns, Socket) -> Return when
-    Assigns :: arizona:assigns(),
+-spec mount(Bindings, Socket) -> Return when
+    Bindings :: arizona:bindings(),
     Socket :: arizona:socket(),
     Return :: arizona:mount_ret().
-mount(Assigns, _Socket) ->
-    View = arizona:new_view(?MODULE, Assigns),
+mount(Bindings, _Socket) ->
+    View = arizona:new_view(?MODULE, Bindings),
     {ok, View}.
 
 -spec render(View) -> Rendered when
@@ -19,7 +19,7 @@ mount(Assigns, _Socket) ->
     Rendered :: arizona:rendered_view_template().
 render(View) ->
     arizona:render_view_template(View, ~"""
-    <div id="{arizona:get_assign(id, View)}">
+    <div id="{arizona:get_binding(id, View)}">
         {arizona:render_view(arizona_example_counter_view, #{
             id => ~"counter0"
         })}

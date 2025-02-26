@@ -6,13 +6,13 @@
 -export([render/1]).
 -export([handle_event/3]).
 
--spec mount(Assigns, Socket) -> Return when
-    Assigns :: arizona:assigns(),
+-spec mount(Bindings, Socket) -> Return when
+    Bindings :: arizona:bindings(),
     Socket :: arizona:socket(),
     Return :: arizona:mount_ret().
-mount(Assigns, _Socket) ->
-    View = arizona:new_view(?MODULE, Assigns#{
-        count => maps:get(count, Assigns, 0)
+mount(Bindings, _Socket) ->
+    View = arizona:new_view(?MODULE, Bindings#{
+        count => maps:get(count, Bindings, 0)
     }),
     {ok, View}.
 
@@ -21,10 +21,10 @@ mount(Assigns, _Socket) ->
     Rendered :: arizona:rendered_view_template().
 render(View) ->
     arizona:render_view_template(View, ~"""
-    <div id="{arizona:get_assign(id, View)}">
-        <span>{integer_to_binary(arizona:get_assign(count, View))}</span>
+    <div id="{arizona:get_binding(id, View)}">
+        <span>{integer_to_binary(arizona:get_binding(count, View))}</span>
         {arizona:render_component(arizona_example_components, button, #{
-            handler => arizona:get_assign(id, View),
+            handler => arizona:get_binding(id, View),
             event => ~"incr",
             payload => 1,
             text => ~"Increment"
@@ -38,5 +38,5 @@ render(View) ->
     View0 :: arizona:view(),
     View1 :: arizona:view().
 handle_event(~"incr", Incr, View) ->
-    Count = arizona:get_assign(count, View),
-    arizona:put_assign(count, Count + Incr, View).
+    Count = arizona:get_binding(count, View),
+    arizona:put_binding(count, Count + Incr, View).

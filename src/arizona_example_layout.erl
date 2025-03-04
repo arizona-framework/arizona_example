@@ -20,7 +20,7 @@ mount(Bindings, _Socket) ->
 render(View) ->
     arizona:render_layout_template(View, ~""""
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang="en" style="height: 100%;">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,7 +29,7 @@ render(View) ->
         {arizona:render_html_scripts()}
         <script src="assets/js/main.js"></script>
     </head>
-    <body>
+    <body style="height: 100%; margin: 0;">
         {arizona:get_binding(inner_content, View)}
     </body>
     </html>

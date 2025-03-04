@@ -46,10 +46,10 @@ render(View) ->
     </div>
     """).
 
--spec handle_event(Event, Payload, View0) -> View1 when
+-spec handle_event(Event, Payload, View) -> Return when
     Event :: arizona:event_name(),
     Payload :: arizona:event_payload(),
-    View0 :: arizona:view(),
-    View1 :: arizona:view().
+    View :: arizona:view(),
+    Return :: arizona:handle_event_ret().
 handle_event(_Event, _Payload, View) ->
-    View.
+    {noreply, View}.

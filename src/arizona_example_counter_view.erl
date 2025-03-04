@@ -32,11 +32,12 @@ render(View) ->
     </div>
     """).
 
--spec handle_event(EventName, Payload, View0) -> View1 when
+-spec handle_event(EventName, Payload, View) -> Return when
     EventName :: arizona:event_name(),
     Payload :: arizona:event_payload(),
-    View0 :: arizona:view(),
-    View1 :: arizona:view().
-handle_event(~"incr", Incr, View) ->
-    Count = arizona:get_binding(count, View),
-    arizona:put_binding(count, Count + Incr, View).
+    View :: arizona:view(),
+    Return :: arizona:handle_event_ret().
+handle_event(~"incr", Incr, View0) ->
+    Count = arizona:get_binding(count, View0),
+    View = arizona:put_binding(count, Count + Incr, View0),
+    {reply, [{~"incr", Count + Incr}], View}.

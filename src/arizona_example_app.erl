@@ -9,6 +9,7 @@
     StartArgs :: term(),
     StartRet :: {ok, pid()} | {error, term()}.
 start(_StartType, _StartArgs) ->
+    ok = arizona_example_counter:create(),
     maybe
         {ok, _SupPid} ?= arizona_example_sup:start_link()
     else

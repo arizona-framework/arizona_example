@@ -35,14 +35,14 @@ describe('Counter Test', () => {
     await page.goto('http://localhost:8080');
 
     // Test the first counter
-    let spanSelector = '#counter0 span';
-    let btnSelector = '#counter0 button';
+    let spanSelector = '#bcastCounter span';
+    let btnSelector = '#bcastCounter button';
     let initialValue = 0;
     await expectCount(page, spanSelector, btnSelector, initialValue);
 
     // Test the second counter
-    spanSelector = '#counter10 span';
-    btnSelector = '#counter10 button';
+    spanSelector = '#counter span';
+    btnSelector = '#counter button';
     initialValue = 10;
     await expectCount(page, spanSelector, btnSelector, initialValue);
   });

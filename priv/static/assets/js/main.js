@@ -11,14 +11,14 @@ arizona.connect(connectParams, (connected) => {
 });
 
 arizona
-  .event("broadcast:incr", "app")
+  .event('broadcast:incr', 'app')
   .handle((count) => {
-    console.log("[incr] Received:", count)
+    console.log('[incr] Received:', count);
   })
   .join()
   .then((payload) => {
-    console.info("[incr] Joined =)", payload)
+    console.info('[incr] Joined =)', payload);
   })
   .catch((reason) => {
-    console.error("[incr] Not joined =(", reason)
-  })
+    console.error('[incr] Not joined =(', reason);
+  });

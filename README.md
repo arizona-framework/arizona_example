@@ -12,6 +12,8 @@ To run it, boot the Erlang/`rebar3` shell: e.g. `rebar3 shell`.
 
 If no errors were shown, the application should now be served at `localhost:8080`.
 
+[arizona_example_showcase.webm](https://github.com/user-attachments/assets/e7cfd693-55b8-4752-b844-3b9175c9d54a)
+
 ## The project
 
 ### Changelog

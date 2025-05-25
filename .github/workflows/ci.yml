@@ -28,14 +28,14 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      - uses: erlef/setup-beam@5304e04ea2b355f03681464e683d92e3b2f18451 # v1.18.2
+      - uses: erlef/setup-beam@8aa8a857c6be0daae6e97272bb299d5b942675a4 # v1.19.0
         id: setup-beam
         with:
           version-type: strict
           version-file: .tool-versions
 
       - name: Restore rebar3's cache
-        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4.2.0
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         with:
           path: ~/.cache/rebar3
           key: "rebar3-cache-for\

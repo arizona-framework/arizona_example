@@ -12,6 +12,6 @@
     "globals": "16.2.0",
     "jest": "30.0.3",
     "prettier": "3.6.2",
-    "puppeteer": "24.11.0"
+    "puppeteer": "24.11.1"
   }
 }

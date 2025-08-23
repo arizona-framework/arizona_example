@@ -1,3 +1,5 @@
+/* global arizona */
+
 // Import the new Arizona client
 import Arizona from '/assets/js/arizona.min.js';
 

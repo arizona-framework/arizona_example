@@ -33,17 +33,9 @@ describe('Counter Test', () => {
 
   test('should increment 1', async () => {
     await page.goto('http://localhost:8080');
-
-    // Test the first counter
-    let spanSelector = '#bcastCounter span';
-    let btnSelector = '#bcastCounter button';
-    let initialValue = 0;
-    await expectCount(page, spanSelector, btnSelector, initialValue);
-
-    // Test the second counter
-    spanSelector = '#counter span';
-    btnSelector = '#counter button';
-    initialValue = 10;
+    const spanSelector = '#counter span';
+    const btnSelector = '#counter button';
+    const initialValue = 0;
     await expectCount(page, spanSelector, btnSelector, initialValue);
   });
 });

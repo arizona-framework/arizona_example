@@ -9,8 +9,23 @@
     StartArgs :: term(),
     StartRet :: {ok, pid()} | {error, term()}.
 start(_StartType, _StartArgs) ->
-    ok = arizona_example_counter:create(),
     maybe
+        % Start Arizona server with routes
+        ServerConfig = #{
+            port => 8080,
+            routes => [
+                % Static assets
+                {static, ~"/favicon.ico", {priv_file, arizona_example, ~"static/favicon.ico"}},
+                {static, ~"/robots.txt", {priv_file, arizona_example, ~"static/robots.txt"}},
+                {static, ~"/assets/example", {priv_dir, arizona_example, ~"static/assets"}},
+                {static, ~"/assets", {priv_dir, arizona, ~"static/assets"}},
+                % Live routes
+                {live, ~"/", arizona_example_view},
+                % WebSocket endpoint for Live connection
+                {live_websocket, ~"/live"}
+            ]
+        },
+        {ok, _ServerPid} ?= arizona_server:start(ServerConfig),
         {ok, _SupPid} ?= arizona_example_sup:start_link()
     else
         {error, Reason} ->

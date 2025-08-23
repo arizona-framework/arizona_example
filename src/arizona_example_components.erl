@@ -1,17 +1,18 @@
 -module(arizona_example_components).
+-compile({parse_transform, arizona_parse_transform}).
 
 -export([button/1]).
 -ignore_xref([button/1]).
 
--spec button(View) -> Rendered when
-    View :: arizona:view(),
-    Rendered :: arizona:rendered_component_template().
-button(View) ->
-    arizona:render_component_template(View, ~"""
+-spec button(Bindings) -> Template when
+    Bindings :: arizona_binder:bindings(),
+    Template :: arizona_template:template().
+button(Bindings) ->
+    arizona_template:from_string(~"""
     <button
-        type="{arizona:get_binding(type, View, ~"button")}"
-        onclick="{arizona:get_binding(on_click, View)}"
+        type="{arizona_template:get_binding(type, Bindings, fun() -> ~"button" end)}"
+        onclick="{arizona_template:get_binding(onclick, Bindings)}"
     >
-        {arizona:get_binding(text, View)}
+        {arizona_template:get_binding(text, Bindings)}
     </button>
     """).

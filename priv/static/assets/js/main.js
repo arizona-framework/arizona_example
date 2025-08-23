@@ -1,24 +1,10 @@
-/*global arizona*/
-'use strict';
+/* global arizona */
 
-const connectParams = {};
-arizona.connect(connectParams, (connected) => {
-  if (connected) {
-    console.info("[Client] I'm connected =)");
-  } else {
-    console.info("[Client] I'm disconnected =(");
-  }
-});
+// Import the new Arizona client
+import Arizona from '/assets/js/arizona.min.js';
 
-arizona
-  .event('broadcast:incr', 'app')
-  .handle((count) => {
-    console.log('[incr] Received:', count);
-  })
-  .join()
-  .then((payload) => {
-    console.info('[incr] Joined =)', payload);
-  })
-  .catch((reason) => {
-    console.error('[incr] Not joined =(', reason);
-  });
+// Initialize the Arizona client
+globalThis.arizona = new Arizona();
+
+// Connect to the WebSocket server
+arizona.connect({ wsPath: '/live' });

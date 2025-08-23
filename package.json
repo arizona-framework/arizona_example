@@ -1,4 +1,6 @@
 {
+  "name": "Arizona Example",
+  "type": "module",
   "scripts": {
     "prettier": "prettier priv/static/assets/js/*.js --write && prettier js_test/*.js --write && prettier eslint.config.mjs --write && prettier package.json --write && prettier .prettierrc --write",
     "eslint": "eslint priv/static/assets/js/*.js && eslint js_test/test.js && eslint eslint.config.mjs",

@@ -40,7 +40,7 @@ server_config() ->
             {live_websocket, ~"/live"}
         ],
         reloader => #{
-            enabled => true,
+            enabled => application:get_env(arizona_example, arizona_reloader_enabled, false),
             rules => [
                 #{
                     directories => ["src"],

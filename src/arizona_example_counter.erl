@@ -21,10 +21,10 @@ render(Bindings) ->
         <span>{arizona_template:get_binding(count, Bindings)}</span>
         {arizona_template:render_stateless(arizona_example_components, button, #{
             text => ~"Increment",
-            onclick => <<"arizona.sendEvent("
+            onclick => <<"arizona.sendEventTo("
+                "'", (arizona_template:get_binding(id, Bindings))/binary, "',"
                 "'incr', "
-                "\{incr: 1}, "
-                "'", (arizona_template:get_binding(id, Bindings))/binary, "'"
+                "\{incr: 1},"
             ")">>
          })}
     </div>

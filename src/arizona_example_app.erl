@@ -50,16 +50,19 @@ config() ->
                     patterns => [".*\\.erl$"],
                     callback => fun(Files) ->
                         _ = os:cmd("rebar3 compile"),
-                        lists:foreach(fun(File) ->
-                            BaseName = filename:basename(File, ".erl"),
-                            Module = list_to_existing_atom(BaseName),
-                            % code:purge/1 removes old version from memory
-                            % Required before loading new version to avoid conflicts
-                            code:purge(Module),
-                            % code:load_file/1 loads the newly compiled .beam file
-                            % This makes the updated code active in the running system
-                            code:load_file(Module)
-                        end, Files)
+                        lists:foreach(
+                            fun(File) ->
+                                BaseName = filename:basename(File, ".erl"),
+                                Module = list_to_existing_atom(BaseName),
+                                % code:purge/1 removes old version from memory
+                                % Required before loading new version to avoid conflicts
+                                code:purge(Module),
+                                % code:load_file/1 loads the newly compiled .beam file
+                                % This makes the updated code active in the running system
+                                code:load_file(Module)
+                            end,
+                            Files
+                        )
                     end
                 },
                 #{

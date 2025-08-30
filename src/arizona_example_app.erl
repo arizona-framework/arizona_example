@@ -10,8 +10,9 @@
     StartRet :: {ok, pid()} | {error, term()}.
 start(_StartType, _StartArgs) ->
     maybe
-        {ok, _ServerPid} ?= arizona_server:start(server_config()),
-        {ok, _SupPid} ?= arizona_example_sup:start_link()
+        {ok, SupPid} ?= arizona_example_sup:start_link(),
+        ok ?= arizona:start(config()),
+        {ok, SupPid}
     else
         {error, Reason} ->
             {error, Reason}
@@ -25,20 +26,22 @@ stop(_State) ->
 
 % Internal functions
 
-server_config() ->
+config() ->
     #{
-        port => 8080,
-        routes => [
-            % Static assets
-            {static, ~"/favicon.ico", {priv_file, arizona_example, ~"static/favicon.ico"}},
-            {static, ~"/robots.txt", {priv_file, arizona_example, ~"static/robots.txt"}},
-            {static, ~"/assets/example", {priv_dir, arizona_example, ~"static/assets"}},
-            {static, ~"/assets", {priv_dir, arizona, ~"static/assets"}},
-            % Live routes
-            {live, ~"/", arizona_example_view},
-            % WebSocket endpoint for Live connection
-            {live_websocket, ~"/live"}
-        ],
+        server => #{
+            transport_opts => [{port, 8080}],
+            routes => [
+                % Static assets
+                {static, ~"/favicon.ico", {priv_file, arizona_example, ~"static/favicon.ico"}},
+                {static, ~"/robots.txt", {priv_file, arizona_example, ~"static/robots.txt"}},
+                {static, ~"/assets/example", {priv_dir, arizona_example, ~"static/assets"}},
+                {static, ~"/assets", {priv_dir, arizona, ~"static/assets"}},
+                % Live routes
+                {live, ~"/", arizona_example_view},
+                % WebSocket endpoint for Live connection
+                {live_websocket, ~"/live"}
+            ]
+        },
         reloader => #{
             enabled => application:get_env(arizona_example, arizona_reloader_enabled, false),
             rules => [

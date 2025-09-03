@@ -32,14 +32,14 @@ config() ->
             transport_opts => [{port, 8080}],
             routes => [
                 % Static assets
-                {static, ~"/favicon.ico", {priv_file, arizona_example, ~"static/favicon.ico"}},
-                {static, ~"/robots.txt", {priv_file, arizona_example, ~"static/robots.txt"}},
-                {static, ~"/assets/example", {priv_dir, arizona_example, ~"static/assets"}},
-                {static, ~"/assets", {priv_dir, arizona, ~"static/assets"}},
-                % Live routes
-                {live, ~"/", arizona_example_view},
-                % WebSocket endpoint for Live connection
-                {live_websocket, ~"/live"}
+                {asset, ~"/favicon.ico", {priv_file, arizona_example, ~"static/favicon.ico"}},
+                {asset, ~"/robots.txt", {priv_file, arizona_example, ~"static/robots.txt"}},
+                {asset, ~"/assets/example", {priv_dir, arizona_example, ~"static/assets"}},
+                {asset, ~"/assets", {priv_dir, arizona, ~"static/assets"}},
+                % View routes
+                {view, ~"/", arizona_example_view, undefined},
+                % WebSocket endpoint
+                {websocket, ~"/live"}
             ]
         },
         reloader => #{

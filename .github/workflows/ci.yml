@@ -59,15 +59,15 @@ jobs:
           for i in {1..5}; do
             sleep 2
             if curl -f -s http://127.0.0.1:8080 > /dev/null 2>&1; then
-              echo "Application ready after $(($i * 2)) seconds"
+              echo "Application ready after $((${i} * 2)) seconds"
               success=true
               break
             fi
-            echo "Attempt $i/5 failed, retrying..."
+            echo "Attempt ${i}/5 failed, retrying..."
           done
 
           # If failed, try foreground to see startup errors
-          if [ "$success" = false ]; then
+          if [[ "${success}" == false ]]; then
             echo "ERROR: Application failed to start after 5 attempts"
             echo "Starting in foreground to show startup errors:"
             timeout 10s _build/default/rel/arizona_example/bin/arizona_example foreground || true

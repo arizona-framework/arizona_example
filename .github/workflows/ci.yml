@@ -52,7 +52,28 @@ jobs:
         run: |
           rebar3 release
           _build/default/rel/arizona_example/bin/arizona_example daemon
-          curl -f -v http://127.0.0.1:8080
+
+          # Wait for application to be ready
+          echo "Waiting for application to start..."
+          success=false
+          for i in {1..5}; do
+            sleep 2
+            if curl -f -s http://127.0.0.1:8080 > /dev/null 2>&1; then
+              echo "Application ready after $((i * 2)) seconds"
+              success=true
+              break
+            fi
+            echo "Attempt ${i}/5 failed, retrying..."
+          done
+
+          # If failed, try foreground to see startup errors
+          if [[ "${success}" == false ]]; then
+            echo "ERROR: Application failed to start after 5 attempts"
+            echo "Starting in foreground to show startup errors:"
+            timeout 10s _build/default/rel/arizona_example/bin/arizona_example foreground || true
+            exit 1
+          fi
+
           npm run test
           _build/default/rel/arizona_example/bin/arizona_example stop
 

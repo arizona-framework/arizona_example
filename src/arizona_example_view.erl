@@ -2,13 +2,14 @@
 -behaviour(arizona_view).
 -compile({parse_transform, arizona_parse_transform}).
 
--export([mount/1]).
+-export([mount/2]).
 -export([render/1]).
 
--spec mount(Req) -> View when
+-spec mount(MountArg, Req) -> View when
+    MountArg :: arizona_view:mount_arg(),
     Req :: arizona_request:request(),
     View :: arizona_view:view().
-mount(Req) ->
+mount(_MountArg, Req) ->
     % Parse query parameters from request
     {QueryParams, _Req1} = arizona_request:get_params(Req),
     CountParam = proplists:get_value(~"count", QueryParams, ~"0"),

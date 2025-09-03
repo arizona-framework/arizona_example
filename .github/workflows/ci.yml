@@ -59,7 +59,7 @@ jobs:
           for i in {1..5}; do
             sleep 2
             if curl -f -s http://127.0.0.1:8080 > /dev/null 2>&1; then
-              echo "Application ready after $((${i} * 2)) seconds"
+              echo "Application ready after $((i * 2)) seconds"
               success=true
               break
             fi

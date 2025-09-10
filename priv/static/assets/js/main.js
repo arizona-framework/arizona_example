@@ -10,8 +10,8 @@ globalThis.arizona = new Arizona();
 arizona.connect({ wsPath: '/live' });
 
 document.addEventListener('arizonaEvent', (event) => {
-    const { type, data } = event.detail;
-    if (type !== 'reply') return
-    if (typeof data?.reload !== 'string') return
-    window.location.reload();
+  const { type, data } = event.detail;
+  if (type !== 'reply') return;
+  if (typeof data?.reload !== 'string') return;
+  window.location.reload();
 });

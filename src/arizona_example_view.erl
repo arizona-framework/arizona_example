@@ -4,12 +4,14 @@
 
 -export([mount/2]).
 -export([render/1]).
+-export([handle_event/3]).
 
 -spec mount(MountArg, Req) -> View when
     MountArg :: arizona_view:mount_arg(),
     Req :: arizona_request:request(),
     View :: arizona_view:view().
 mount(_MountArg, Req) ->
+    _ = arizona_live:is_connected(self()) andalso initialize_connected_session(),
     % Parse query parameters from request
     {QueryParams, _Req1} = arizona_request:get_params(Req),
     CountParam = proplists:get_value(~"count", QueryParams, ~"0"),
@@ -40,3 +42,16 @@ render(Bindings) ->
         })}
     </main>
     """).
+
+-spec handle_event(Event, Params, View) -> Result when
+    Event :: arizona_stateful:event_name(),
+    Params :: arizona_stateful:event_params(),
+    View :: arizona_view:view(),
+    Result :: {reply, Reply, View1} | {noreply, View1},
+    Reply :: arizona_stateful:event_reply(),
+    View1 :: arizona_view:view().
+handle_event(~"reload", FileType, View) ->
+    {reply, #{~"reload" => FileType}, View}.
+
+initialize_connected_session() ->
+    arizona_pubsub:join(~"reload", self()).

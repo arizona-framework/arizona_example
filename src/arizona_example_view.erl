@@ -47,11 +47,9 @@ render(Bindings) ->
     Event :: arizona_stateful:event_name(),
     Params :: arizona_stateful:event_params(),
     View :: arizona_view:view(),
-    Result :: {reply, Reply, View1} | {noreply, View1},
-    Reply :: arizona_stateful:event_reply(),
-    View1 :: arizona_view:view().
+    Result :: arizona_view:handle_event_result().
 handle_event(~"reload", FileType, View) ->
-    {reply, #{~"reload" => FileType}, View}.
+    {[{reply, #{~"reload" => FileType}}], View}.
 
 initialize_connected_session() ->
     arizona_pubsub:join(~"reload", self()).

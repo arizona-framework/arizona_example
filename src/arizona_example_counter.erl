@@ -30,12 +30,12 @@ render(Bindings) ->
     </div>
     """).
 
--spec handle_event(Event, Params, State) -> {noreply, State1} when
+-spec handle_event(Event, Params, State) -> Result when
     Event :: arizona_stateful:event_name(),
     Params :: arizona_stateful:event_params(),
     State :: arizona_stateful:state(),
-    State1 :: arizona_stateful:state().
+    Result :: arizona_stateful:handle_event_result().
 handle_event(~"incr", #{~"incr" := Incr}, State) ->
     Count = arizona_stateful:get_binding(count, State),
     State1 = arizona_stateful:put_binding(count, Count + Incr, State),
-    {noreply, State1}.
+    {[], State1}.

@@ -1,10 +1,11 @@
 -module(arizona_example_assets_reloader).
 -behaviour(arizona_reloader).
 
--export([reload/1]).
+-export([reload/2]).
 
--spec reload(Files) -> Result when
+-spec reload(Files, Opts) -> Result when
     Files :: arizona_reloader:reload_files(),
+    Opts :: map(),
     Result :: arizona_reloader:reload_result().
-reload(_Files) ->
+reload(_Files, _Opts) ->
     arizona_pubsub:broadcast(~"reload", assets).

@@ -69,6 +69,8 @@ jobs:
           # If failed, try foreground to see startup errors
           if [[ "${success}" == false ]]; then
             echo "ERROR: Application failed to start after 5 attempts"
+            echo "Stopping any running daemon before foreground start:"
+            _build/default/rel/arizona_example/bin/arizona_example stop || true
             echo "Starting in foreground to show startup errors:"
             timeout 10s _build/default/rel/arizona_example/bin/arizona_example foreground || true
             exit 1

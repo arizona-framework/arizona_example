@@ -70,7 +70,8 @@ jobs:
           if [[ "${success}" == false ]]; then
             echo "ERROR: Application failed to start after 5 attempts"
             echo "Checking daemon status and attempting to fetch page content:"
-            _build/default/rel/arizona_example/bin/arizona_example ping || echo "Daemon not responding to ping"
+            _build/default/rel/arizona_example/bin/arizona_example ping || \
+              echo "Daemon not responding to ping"
             echo "Attempting to fetch page HTML for debugging:"
             curl -v http://127.0.0.1:8080 || echo "HTTP request failed"
 

@@ -16,7 +16,7 @@ mount(Bindings) ->
     Bindings :: arizona_binder:bindings(),
     Template :: arizona_template:template().
 render(Bindings) ->
-    arizona_template:from_string(~"""
+    arizona_template:from_html(~"""
     <div id="{arizona_template:get_binding(id, Bindings)}">
         <span>{arizona_template:get_binding(count, Bindings)}</span>
         {arizona_template:render_stateless(arizona_example_components, button, #{

@@ -66,9 +66,17 @@ jobs:
             echo "Attempt ${i}/5 failed, retrying..."
           done
 
-          # If failed, try foreground to see startup errors
+          # If failed, try to get diagnostic info from running daemon first
           if [[ "${success}" == false ]]; then
             echo "ERROR: Application failed to start after 5 attempts"
+            echo "Checking daemon status and attempting to fetch page content:"
+            _build/default/rel/arizona_example/bin/arizona_example ping || \
+              echo "Daemon not responding to ping"
+            echo "Attempting to fetch page HTML for debugging:"
+            curl -v http://127.0.0.1:8080 || echo "HTTP request failed"
+
+            echo "Stopping daemon and starting in foreground as fallback:"
+            _build/default/rel/arizona_example/bin/arizona_example stop || true
             echo "Starting in foreground to show startup errors:"
             timeout 10s _build/default/rel/arizona_example/bin/arizona_example foreground || true
             exit 1

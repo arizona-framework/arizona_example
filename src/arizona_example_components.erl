@@ -8,9 +8,9 @@
     Bindings :: arizona_binder:bindings(),
     Template :: arizona_template:template().
 button(Bindings) ->
-    arizona_template:from_string(~"""
+    arizona_template:from_html(~"""
     <button
-        type="{arizona_template:get_binding(type, Bindings, fun() -> ~"button" end)}"
+        type="{arizona_template:get_binding(type, Bindings, ~"button")}"
         onclick="{arizona_template:get_binding(onclick, Bindings)}"
     >
         {arizona_template:get_binding(text, Bindings)}

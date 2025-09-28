@@ -7,7 +7,7 @@ import Arizona from '/assets/js/arizona.min.js';
 globalThis.arizona = new Arizona();
 
 // Connect to the WebSocket server
-arizona.connect({ wsPath: '/live' });
+arizona.connect('/live');
 
 document.addEventListener('arizonaEvent', (event) => {
   const { type, data } = event.detail;

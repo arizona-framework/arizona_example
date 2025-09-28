@@ -8,7 +8,7 @@
     Bindings :: arizona_binder:bindings(),
     Template :: arizona_template:template().
 render(Bindings) ->
-    arizona_template:from_string(~""""
+    arizona_template:from_html(~""""
     <!DOCTYPE html>
     <html lang="en">
     <head>

@@ -34,7 +34,7 @@ mount(_MountArg, Req) ->
     Bindings :: arizona_binder:bindings(),
     Template :: arizona_template:template().
 render(Bindings) ->
-    arizona_template:from_string(~"""
+    arizona_template:from_html(~"""
     <main id="{arizona_template:get_binding(id, Bindings)}">
         {arizona_template:render_stateful(arizona_example_counter, #{
             id => ~"counter",

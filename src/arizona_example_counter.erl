@@ -7,32 +7,32 @@
 -export([handle_event/3]).
 
 -spec mount(Bindings) -> State when
-    Bindings :: arizona_binder:map(),
+    Bindings :: map(),
     State :: arizona_stateful:state().
 mount(Bindings) ->
     arizona_stateful:new(?MODULE, Bindings).
 
 -spec render(Bindings) -> Template when
-    Bindings :: arizona_binder:bindings(),
+    Bindings :: map(),
     Template :: arizona_template:template().
 render(Bindings) ->
-    arizona_template:from_html(~"""
-    <div id="{arizona_template:get_binding(id, Bindings)}">
-        <span>{arizona_template:get_binding(count, Bindings)}</span>
-        {arizona_template:render_stateless(arizona_example_components, button, #{
-            text => ~"Increment",
-            onclick => <<"arizona.sendEventTo("
-                "'", (arizona_template:get_binding(id, Bindings))/binary, "',"
-                "'incr', "
-                "\{incr: 1},"
-            ")">>
-         })}
-    </div>
-    """).
+    arizona_template:from_erl(
+        {'div', [{id, arizona_template:get_binding(id, Bindings)}], [
+            {span, [], arizona_template:get_binding(count, Bindings)},
+            arizona_template:render_stateless(arizona_example_components, button, #{
+                text => ~"Increment",
+                onclick => [
+                    ~"arizona.pushEventTo('",
+                    arizona_template:get_binding(id, Bindings),
+                    ~"', 'incr', {incr: 1})"
+                ]
+            })
+        ]}
+    ).
 
--spec handle_event(Event, Params, State) -> Result when
+-spec handle_event(Event, Payload, State) -> Result when
     Event :: arizona_stateful:event_name(),
-    Params :: arizona_stateful:event_params(),
+    Payload :: arizona_stateful:event_payload(),
     State :: arizona_stateful:state(),
     Result :: arizona_stateful:handle_event_result().
 handle_event(~"incr", #{~"incr" := Incr}, State) ->

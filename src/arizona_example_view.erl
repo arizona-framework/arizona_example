@@ -4,52 +4,31 @@
 
 -export([mount/2]).
 -export([render/1]).
--export([handle_event/3]).
 
 -spec mount(MountArg, Req) -> View when
     MountArg :: arizona_view:mount_arg(),
     Req :: arizona_request:request(),
     View :: arizona_view:view().
-mount(_MountArg, Req) ->
-    _ = arizona_live:is_connected(self()) andalso initialize_connected_session(),
-    % Parse query parameters from request
-    {QueryParams, _Req1} = arizona_request:get_params(Req),
-    CountParam = proplists:get_value(~"count", QueryParams, ~"0"),
-    Count = binary_to_integer(CountParam),
+mount(_MountArg, _Req) ->
+    Bindings = #{
+        id => ~"app",
+        count => 0
+    },
     Layout =
         {arizona_example_layout, render, inner_content, #{
             title => ~"Arizona Example"
         }},
     % Initialize view with bindings and layout
-    arizona_view:new(
-        ?MODULE,
-        #{
-            id => ~"app",
-            count => Count
-        },
-        Layout
-    ).
+    arizona_view:new(?MODULE, Bindings, Layout).
 
 -spec render(Bindings) -> Template when
-    Bindings :: arizona_binder:bindings(),
+    Bindings :: map(),
     Template :: arizona_template:template().
 render(Bindings) ->
-    arizona_template:from_html(~"""
-    <main id="{arizona_template:get_binding(id, Bindings)}">
-        {arizona_template:render_stateful(arizona_example_counter, #{
-            id => ~"counter",
-            count => arizona_template:get_binding(count, Bindings)
-        })}
-    </main>
-    """).
-
--spec handle_event(Event, Params, View) -> Result when
-    Event :: arizona_stateful:event_name(),
-    Params :: arizona_stateful:event_params(),
-    View :: arizona_view:view(),
-    Result :: arizona_view:handle_event_result().
-handle_event(~"reload", FileType, View) ->
-    {[{reply, #{~"reload" => FileType}}], View}.
-
-initialize_connected_session() ->
-    arizona_pubsub:join(~"reload", self()).
+    arizona_template:from_erl(
+        {main, [{id, arizona_template:get_binding(id, Bindings)}],
+            arizona_template:render_stateful(arizona_example_counter, #{
+                id => ~"counter",
+                count => arizona_template:get_binding(count, Bindings)
+            })}
+    ).
